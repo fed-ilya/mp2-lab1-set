@@ -161,20 +161,20 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	TBitField res;
-	TBitField pr;
 	if (BitLen > bf.BitLen) {
 		TBitField res(*this);
 		TBitField pr(BitLen);
 		for (int i = 0; i < res.MemLen; i++) { pr.pMem[i] = bf.pMem[i]; }
+		for (int i = 0; i < res.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
+		return res;
 	}
 	else {
 		TBitField res(bf);
 		TBitField pr(bf.BitLen);
 		for (int i = 0; i < res.MemLen; i++) { pr.pMem[i] = pMem[i]; }
+		for (int i = 0; i < res.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
+		return res;
 	}
-	for (int i = 0; i < res.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
-	return res;
 }
 
 TBitField TBitField::operator~(void) // отрицание

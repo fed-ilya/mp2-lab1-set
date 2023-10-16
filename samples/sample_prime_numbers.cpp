@@ -58,7 +58,9 @@ int main()
     TBitField second(8);
     TBitField test(8);
     first.SetBit(0);
+    cout << first << " ";
     first2 = ~first;
+    cout << first2 << " ";
     // negFirstBf = 1110
 
     // secondBf = 00011000
@@ -68,7 +70,8 @@ int main()
     // testBf = 00001000
     test.SetBit(3);
 
-    cout << (second & first2);
+    cout << first2 << " " << second << " ";
+    cout << (first2 & second);
     
 }
 #else
