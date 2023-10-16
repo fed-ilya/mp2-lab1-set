@@ -51,6 +51,25 @@ int main()
       }
     cout << endl;
     cout << "В первых " << n << " числах " << count << " простых" << endl;
+
+    
+    TBitField first(4);
+    TBitField first2(4);
+    TBitField second(8);
+    TBitField test(8);
+    first.SetBit(0);
+    first2 = ~first;
+    // negFirstBf = 1110
+
+    // secondBf = 00011000
+    second.SetBit(3);
+    second.SetBit(4);
+
+    // testBf = 00001000
+    test.SetBit(3);
+
+    cout << (second & first2);
+    
 }
 #else
 
