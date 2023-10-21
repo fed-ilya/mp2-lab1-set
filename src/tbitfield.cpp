@@ -7,7 +7,7 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int _BitLen = 1)
+TBitField::TBitField(int _BitLen)
 {
 	if (_BitLen <= 0) { throw "wrong len"; }
 	else {
@@ -161,28 +161,63 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
+	/*
+	int max_L = bf.BitLen;
+	if (BitLen > bf.BitLen) { max_L = BitLen; }
+	TBitField res(max_L);
+
+	cout << *this << "|||" << bf << "\n";
+	cout << pMem[0] << "|||" << bf.pMem[0] << "\n";
+
+	TBitField pr(max_L);
+	for (int i = 0; i < bf.MemLen; i++) { pr.pMem[i] = bf.pMem[i]; }
+	for (int i = bf.BitLen; i < pr.BitLen; i++) { pr.ClrBit(i); }
+	for (int i = 0; i < MemLen; i++) { res.pMem[i] = pMem[i]; }
+	for (int i = 0; i < bf.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
+
+	cout << *this << "|||" << pr << "\n";
+	cout << res.pMem[0] << "\n";
+	cout << res << "\n";
+
+	return res;
+	*/
+	
 	if (BitLen > bf.BitLen) {
 		TBitField res(*this);
 		TBitField pr(BitLen);
-		for (int i = 0; i < res.MemLen; i++) { pr.pMem[i] = bf.pMem[i]; }
+		for (int i = 0; i < bf.MemLen; i++) { pr.pMem[i] = bf.pMem[i]; }
+		for (int i = bf.BitLen; i < pr.BitLen; i++) { pr.ClrBit(i); }
+		//cout << pMem[0] << " " << bf.pMem[0] << "\n";
+		//cout << res.pMem[0] << " " << pr.pMem[0] << "\n";
 		for (int i = 0; i < res.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
 		return res;
+	
 	}
 	else {
 		TBitField res(bf);
 		TBitField pr(bf.BitLen);
-		for (int i = 0; i < res.MemLen; i++) { pr.pMem[i] = pMem[i]; }
+		for (int i = 0; i < MemLen; i++) { pr.pMem[i] = pMem[i]; }
+		for (int i = BitLen; i < pr.BitLen; i++) { pr.ClrBit(i); }
+		//cout << pMem[0] << " " << bf.pMem[0] << "\n";
+		//cout << res.pMem[0] << " " << pr.pMem[0] << "\n";
 		for (int i = 0; i < res.MemLen; i++) { res.pMem[i] = pr.pMem[i] & res.pMem[i]; }
 		return res;
 	}
+	
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField res(BitLen);
+	//TBitField p(BitLen);
+	//unsigned char a ;
 	for (int i = 0; i < MemLen; i++) {
 		res.pMem[i] = ~pMem[i];
+		//cout << "12312312312" << " " << *this << "|||" << pMem[0] << "\n";
+		//a = ~pMem[i];
+		//res.pMem[i] = static_cast<unsigned int>(a);
 	}
+	//cout << "12312312312" << " " << res << "|||" << res.pMem[0] << "\n";
 	return res;
 }
 

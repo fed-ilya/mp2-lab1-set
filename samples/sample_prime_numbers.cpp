@@ -57,21 +57,21 @@ int main()
     TBitField first2(4);
     TBitField second(8);
     TBitField test(8);
+    // first = 0001
     first.SetBit(0);
-    cout << first << " ";
+    // cout << first << " ";
     first2 = ~first;
-    cout << first2 << " ";
-    // negFirstBf = 1110
+    // cout << first2 << " ";
+    // first2 = 1110
 
-    // secondBf = 00011000
+    // second = 00011000
     second.SetBit(3);
     second.SetBit(4);
 
-    // testBf = 00001000
+    // test = 00001000
     test.SetBit(3);
-
-    cout << first2 << " " << second << " ";
-    cout << (first2 & second);
+    // cout << second << " ";
+    cout << (first2 & second  );
     
 }
 #else
